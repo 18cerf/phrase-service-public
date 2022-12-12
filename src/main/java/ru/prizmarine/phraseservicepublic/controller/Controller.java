@@ -3,11 +3,9 @@ package ru.prizmarine.phraseservicepublic.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import ru.prizmarine.phraseservicepublic.domen.api.RegistrationRequest;
 import ru.prizmarine.phraseservicepublic.domen.response.Response;
 import ru.prizmarine.phraseservicepublic.service.PhraseService;
 
@@ -28,11 +26,12 @@ public class Controller {
     }
 
 
-    @PostMapping("/test")
-    public ResponseEntity<Response> test() {
-        log.info("Start endpoint test");
-        ResponseEntity<Response> response = phraseService.test();
-        log.info("End endpoint test, response: {}", response);
-        return response;
+    @PostMapping("/registration")
+    public ResponseEntity<Response> registration(@RequestBody final RegistrationRequest req) {
+
+        log.info("START endpoint registration, request: {}", req);
+        ResponseEntity<Response> resp = phraseService.registration(req);
+        log.info("END endpoint registration, response: {}", resp);
+        return resp;
     }
 }
